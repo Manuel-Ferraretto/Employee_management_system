@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>List of available employees</title>
+  <link th:href="@{/css/styles.css}" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+</head>
+<body>
+  <h2 th:text="${project.title}">Project title: </h2>
+  <input type="hidden" th:value="${project.idProject}" name="idProject">
+  <div th:if="!${#lists.isEmpty(employees)}">
+
+    <div class="alert alert-success" role="alert" th:text="${message}" th:if="!${#strings.isEmpty(message)}"></div>
+
+    <table class="table">
+      <div class="table-titles">
+        <thead>
+        <tr>
+          <th>Name</th>
+          <th>Last name</th>
+          <th>Action</th>
+        </tr>
+        </thead>
+      </div>
+
+      <div class="table-content">
+        <tbody>
+        <tr th:each="employee : ${employees}">
+          <td th:text="${employee.name}"/>
+          <td th:text="${employee.lastName}"/>
+          <td>
+            <a th:href="@{/project/addToProject/{idEmployee}/{idProject}(idEmployee=${employee.idEmployee},
+                                                                         idProject=${project.idProject})}"
+                  type="button" class="btn btn-success">Add to project</a>
+          </td>
+        </tr>
+        </tbody>
+      </div>
+    </table>
+  </div>
+
+</body>
+</html>

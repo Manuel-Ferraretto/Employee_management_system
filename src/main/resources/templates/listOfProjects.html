@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>List of projects</title>
+    <link th:href="@{/css/styles.css}" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-dark">
+        <a href="/home">Main menu</a>
+    </nav>
+
+    <div th:if="!${#lists.isEmpty(inProgressProjects)}">
+        <table class="table">
+            <div class="table-titles">
+                <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Start Date</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+            </div>
+
+            <div class="table-content">
+                <tbody>
+                    <tr th:each="project : ${inProgressProjects}">
+                        <td th:text="${project.title}"/>
+                        <td th:text="${project.description}"/>
+                        <td th:text="${#temporals.format(project.startDate, 'dd-MM-yyyy')}"/>
+                        <td>
+                            <a th:href="@{/project/addEmployeesToProject/{idProject}(idProject=${project.idProject})}"
+                               type="button" class="btn btn-success">Add employees to project</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </div>
+        </table>
+    </div>
+
+    <div th:if="!${#lists.isEmpty(finishedProjects)}">
+        <table class="table">
+            <div class="table-titles">
+                <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Start Date</th>
+                    <th>Finish date</th>
+                </tr>
+                </thead>
+            </div>
+
+            <div class="table-content">
+                <tbody>
+                    <tr th:each="project : ${finishedProjects}">
+                        <td th:text="${project.title}"/>
+                        <td th:text="${project.description}"/>
+                        <td th:text="${#temporals.format(project.startDate, 'dd-MM-yyyy')}"/>
+                        <td th:text="${#temporals.format(project.finishDate, 'dd-MM-yyyy')}"/>
+                    </tr>
+                </tbody>
+            </div>
+        </table>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script th:src="@{/js/addEmployeesToProject.js}"></script>
+</body>
+</html>
