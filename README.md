@@ -1,8 +1,4 @@
 # Employee management system
-App to manage employees  
-Current functionalities:  
-  - CRUD Employees
-  - Read projects
-  - Add employees to project  
 
-More functionalities coming soon..
+The aim of this simple project is to get hands-on experience in the Springboot framework. 
+
